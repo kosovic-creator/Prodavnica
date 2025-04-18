@@ -1,8 +1,25 @@
+
 "use server";
 
 import { db } from "@/prisma/db";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
+
+
+export async function getAllUsers() {
+  try {
+    return await db.user.findMany({
+      orderBy: {
+        id: "desc",
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+}
+
+
 
 export async function createUserAction(
   formState: { message: string },
@@ -117,6 +134,30 @@ export async function getUserById(id: number | string) {
     return user;
   } catch (error) {
     console.error("Error fetching user:", error);
+    throw error;
+  }
+}
+export async function updateUserById(
+  id: number | string,
+  data: { name?: string; username?: string; email?: string; password?: string }
+): Promise<void> {
+  const numericId = typeof id === "string" ? parseInt(id, 10) : id;
+
+  if (!numericId || isNaN(numericId)) {
+    throw new Error("Invalid ID provided.");
+  }
+
+  try {
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    await db.user.update({
+      where: { id: numericId },
+      data,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
     throw error;
   }
 }

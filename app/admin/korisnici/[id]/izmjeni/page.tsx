@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { updateUserAction, getUserById } from '@/actions/index'; // Adjust the import path as necessary
+import { updateUserAction, getUserById } from '@/actions/index';
+import { useParams } from 'next/navigation'; // Adjust the import path as necessary
 
 const UpdateUserForm: React.FC<{ userId: number }> = ({ userId }) => {
   const [formData, setFormData] = useState({
@@ -11,11 +12,13 @@ const UpdateUserForm: React.FC<{ userId: number }> = ({ userId }) => {
     password: '',
   });
   const [message, setMessage] = useState('');
-
+   const { id } = useParams(); // Assuming you're using Next.js
+    const numericId = typeof id === 'string' ? parseInt(id, 10) : NaN;
+console.log('numericId:', numericId);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const user = await getUserById(userId);
+        const user = await getUserById(numericId);
         if (user) {
           setFormData({
             id: user.id.toString(),

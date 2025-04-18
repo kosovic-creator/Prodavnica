@@ -36,7 +36,7 @@ export async function izmjeniArtikal(id: number, data: { naziv?: string; cijena?
       data,
     });
   } catch (error) {
-    console.error("Error updating artikal:", error);
+    console.error("Greška u izmjeni podataka:", error);
     throw error;
   }
 }
