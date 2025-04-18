@@ -32,3 +32,9 @@ model Product {
   name  String
   price Int
 }
+
+model Artikal {
+  id    Int    @id @default(autoincrement())
+  naziv  String
+  cijena Int
+}

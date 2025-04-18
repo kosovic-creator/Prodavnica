@@ -20,7 +20,7 @@ const Nav = async () => {
           <Link href="/ClientMember">Client Member</Link>
           <Link href="/Member">Member</Link>
           <Link href="/Public">Public</Link>
-          <Link href="/product">Product</Link>
+          <Link href="/artikli">Artikli</Link>
           <Link href="/product/search">Search</Link>
           {session ? (
             <>
