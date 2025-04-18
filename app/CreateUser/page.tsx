@@ -8,11 +8,11 @@ const CreateUser = () => {
 
   return (
     <form action={action} className="flex flex-col gap-3 w-1/2">
-      <h1>Create New User</h1>
-      <label>Full Name</label>
+      <h1>Dodaj Novog Korisnika</h1>
+      <label>Ime i Prezime</label>
       <input id="name" name="name" className="border rounded p-2 w-full" />
 
-      <label>Username</label>
+      <label>Korisničko Ime</label>
       <input
         id="username"
         name="username"
@@ -33,7 +33,7 @@ const CreateUser = () => {
       />
       <input
         type="submit"
-        value="Create User"
+        value="Dodaj Korisnika"
         className="rounded p-2 bg-blue-300 hover:bg-blue-200"
       />
       {formState.message && <p className="text-red-500">{formState.message}</p>}

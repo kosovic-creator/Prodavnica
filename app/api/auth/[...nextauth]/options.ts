@@ -23,30 +23,30 @@ const options: NextAuthOptions = {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
-    GoogleProvider({
-      profile(profile) {
-        //console.log("Profile Google: ", profile);
-        let userRole = "USER";
+    // GoogleProvider({
+    //   profile(profile) {
+    //     //console.log("Profile Google: ", profile);
+    //     let userRole = "USER";
 
-        return {
-          ...profile,
-          role: userRole,
-          id: profile.sub,
-        };
-      },
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+    //     return {
+    //       ...profile,
+    //       role: userRole,
+    //       id: profile.sub,
+    //     };
+    //   },
+    //   clientId: process.env.GOOGLE_CLIENT_ID!,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    // }),
     CredentialsProvider({
       id: "password",
       name: "Username and Password",
       credentials: {
         username: {
-          label: "Username",
+          label: "Korisničko Ime",
           type: "text",
           placeholder: "Username...",
         },
-        password: { label: "Password", type: "password" },
+        password: { label: "Šifra", type: "password" },
       },
       authorize: async (credentials) => {
         if (!credentials) {
