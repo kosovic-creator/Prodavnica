@@ -36,6 +36,8 @@ export default function IzmjeniArtikal() {
     fetchProduct();
   }, [id, router]);
 
+  // Removed unused userId-related code
+
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

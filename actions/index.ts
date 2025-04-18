@@ -14,7 +14,7 @@ export async function createUserAction(
     let password = formData.get("password") as string;
     const email = formData.get("email") as string;
     if (!name || !username || !password || !email) {
-      return { message: "All fields are required" };
+      return { message: "Sva polja su obavezna" };
     }
 
     const duplicate = await db.user.findUnique({
@@ -24,11 +24,11 @@ export async function createUserAction(
     });
 
     if (duplicate) {
-      return { message: "That username already exists." };
+      return { message: "Korisnik već pstoji." };
     }
 
     if (password.length < 5) {
-      return { message: "Password is too short." };
+      return { message: "Šifra je kratka." };
     }
 
     password = await bcrypt.hash(password, 10);
@@ -36,8 +36,87 @@ export async function createUserAction(
     await db.user.create({ data: { name, username,email, password } });
   } catch (err: unknown) {
     return {
-      message: "Unknown Error Occured!",
+      message: "Nepoznata greška!",
     };
   }
   redirect("/");
+}
+
+export async function deleteUserAction(
+  formState: { message: string },
+  formData: FormData
+) {
+  try {
+    const id = formData.get("id") as string;
+    if (!id) {
+      return { message: "ID je obavezno." };
+    }
+    const numericId = parseInt(id, 10);
+    if (isNaN(numericId)) {
+      return { message: "ID mora biti broj." };
+    }
+    db.user.delete({ where: { id: numericId } });
+  } catch (err: unknown) {
+    return {
+      message: "Nepoznata greška!",
+    };
+  }
+  redirect("/");
+}
+
+export async function updateUserAction(
+  formState: { message: string },
+  formData: FormData
+) {
+  try {
+    const id = formData.get("id") as string;
+    const name = formData.get("name") as string;
+    const username = formData.get("username") as string;
+    let password = formData.get("password") as string;
+    const email = formData.get("email") as string;
+
+    if (!id || !name || !username || !password || !email) {
+      return { message: "Sva polja su obavezna" };
+    }
+
+    const numericId = parseInt(id, 10);
+    if (isNaN(numericId)) {
+      return { message: "ID mora biti broj." };
+    }
+
+    password = await bcrypt.hash(password, 10);
+
+    await db.user.update({
+      where: { id: numericId },
+      data: { name, username, email, password },
+    });
+  } catch (err: unknown) {
+    return {
+      message: "Nepoznata greška!",
+    };
+  }
+  redirect("/");
+}
+export async function getUserById(id: number | string) {
+  console.log("Received ID:", id); // Debugging line
+  const numericId = typeof id === "string" ? parseInt(id, 10) : id;
+
+  if (!numericId || isNaN(numericId)) {
+    throw new Error("Invalid ID provided.");
+  }
+
+  try {
+    const user = await db.user.findUnique({
+      where: { id: numericId },
+    });
+
+    if (!user) {
+      throw new Error("User not found.");
+    }
+
+    return user;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    throw error;
+  }
 }
