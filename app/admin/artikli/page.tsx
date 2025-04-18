@@ -14,7 +14,7 @@ export default async function  Artikli() {
 return (
 
       <div className="flex flex-col items-center justify-center min-h-screen">
-         <Link className='text-emerald-900' href="/artikli/novi">Dodaj</Link>
+         <Link className='text-emerald-900' href="/admin/artikli/novi">Dodaj</Link>
         <h1 className="text-3xl font-bold mb-6">Artikli</h1>
         <table className="table-auto border-collapse border border-gray-300 w-full max-w-4xl">
           <thead>
@@ -32,8 +32,8 @@ return (
                 <td className="border border-gray-300 px-4 py-2">{artikal.naziv}</td>
                 <td className="border border-gray-300 px-4 py-2">${artikal.cijena}</td>
                 <td>
-                  <Link className='text-emerald-600' href={`/artikli/${artikal.id}/izmjeni`}>Prikaži</Link>
-                  <Link className='text-amber-700' href={`/artikli/${artikal.id}/ukloni`}>Ukloni</Link>
+                  <Link className='text-emerald-600' href={`/admin/artikli/${artikal.id}/izmjeni`}>Prikaži</Link>
+                  <Link className='text-amber-700' href={`/admin/artikli/${artikal.id}/ukloni`}>Ukloni</Link>
                 </td>
               </tr>
             ))}

@@ -53,7 +53,7 @@ export default function IzmjeniArtikal() {
       });
 
       setMessage("Artikal je uspješno izmjenjen!");
-      router.push(`/artikli/`);
+      router.push(`/admin/artikli/`);
       console.log("Izmjenjen Artikal:", izmjenjenArtikal);
     } catch (error) {
       setMessage("Greška pri izmjeni Artikla.");
@@ -64,12 +64,13 @@ export default function IzmjeniArtikal() {
   };
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Update Product</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Izmjeni Artikal</h1>
+
       <form onSubmit={handleUpdate} className="flex flex-col gap-4 mt-4">
         <div>
           <label htmlFor="naziv" className="block font-medium">
-            Product naziv:
+            Naziv:
           </label>
           <input
             type="text"
@@ -82,7 +83,7 @@ export default function IzmjeniArtikal() {
         </div>
         <div>
           <label htmlFor="cijena" className="block font-medium">
-            Product cijena:
+            Cijena:
           </label>
           <input
             type="number"

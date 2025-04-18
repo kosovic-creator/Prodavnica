@@ -20,8 +20,8 @@ const Nav = async () => {
           <Link href="/ClientMember"></Link>
           <Link href="/Member"></Link>
           <Link href="/Public"></Link>
-          <Link href="/artikli">Artikli</Link>
-          <Link href="/artikli/trazi">Traži</Link>
+          <Link href="/admin/artikli">Artikli</Link>
+          <Link href="/admin/artikli/trazi">Traži</Link>
           {session ? (
             <>
               <p>{session.user.name}</p>

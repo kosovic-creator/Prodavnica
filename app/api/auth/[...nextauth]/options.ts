@@ -44,7 +44,7 @@ const options: NextAuthOptions = {
         username: {
           label: "Korisničko Ime",
           type: "text",
-          placeholder: "Username...",
+          placeholder: "Korisničko ime...",
         },
         password: { label: "Šifra", type: "password" },
       },

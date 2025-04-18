@@ -30,7 +30,7 @@ export default function NewProductPage() {
 
       setMessage('Artikal je uspješno dodat!');
 
-      router.push(`/artikli/`);
+      router.push(`/admin/artikli/`);
     } catch (error) {
       if (error instanceof z.ZodError) {
         // Prikazivanje grešaka validacije

@@ -23,7 +23,7 @@ export default async function page({ params }: PageProps) {
         <h1 className="text-3xl font-bold mb-6">Ukloni Artikal</h1>
         <form className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
           <p>Artikal sa ID {id} biće uklonjen.</p>
-          <Link href="/artikli"  className="text-blue-800 underline">Vrati se na stranu Artikli</Link>
+          <Link href="/admin/artikli"  className="text-blue-800 underline">Vrati se na stranu Artikli</Link>
         </form>
       </div>
 
