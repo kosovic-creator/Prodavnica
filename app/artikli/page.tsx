@@ -32,8 +32,8 @@ return (
                 <td className="border border-gray-300 px-4 py-2">{artikal.naziv}</td>
                 <td className="border border-gray-300 px-4 py-2">${artikal.cijena}</td>
                 <td>
-                  <Link className='text-emerald-600' href={`/artikli/${artikal.id}/update`}>Prikaži</Link>
-                  <Link className='text-amber-700' href={`/artikli/${artikal.id}/delete`}>Ukloni</Link>
+                  <Link className='text-emerald-600' href={`/artikli/${artikal.id}/izmjeni`}>Prikaži</Link>
+                  <Link className='text-amber-700' href={`/artikli/${artikal.id}/ukloni`}>Ukloni</Link>
                 </td>
               </tr>
             ))}

@@ -63,7 +63,7 @@ export async function prikaziArtikalId(id: number) {
     throw error;
   }
 }
-export async function prikaziArtikalNaazivnaziv(naziv: string) {
+export async function prikaziArtiklPoNazivu(naziv: string) {
   try {
     return await db.artikal.findFirst({
       where: { naziv },
