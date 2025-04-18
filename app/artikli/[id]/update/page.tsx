@@ -1,14 +1,14 @@
 'use client';
-import { updateProduct, getProductById } from "@/actions/product.actions";
+import { izmjeniArtikal, prikaziArtikalId } from "@/actions/artikli.actions";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 export const fetchCache = "force-no-store";
 
-export default function UpdateProductPage() {
+export default function IzmjeniArtikal() {
   const { id } = useParams();
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [naziv, setnaziv] = useState("");
+  const [cijena, setcijena] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
     const router = useRouter();
@@ -19,17 +19,17 @@ export default function UpdateProductPage() {
       if (!id) return;
 
       try {
-        const product = await getProductById(Number(id));
-        if (product) {
-          setName(product.name);
-          setPrice(product.price.toString());
+        const artikal = await prikaziArtikalId(Number(id));
+        if (artikal) {
+          setnaziv(artikal.naziv);
+          setcijena(artikal.cijena.toString());
 
         } else {
-          setMessage("Product not found.");
+          setMessage("Artikal nije nađen.");
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
-        setMessage("Failed to fetch product details.");
+        console.error("Greška pri učitavanju artikala:", error);
+        setMessage("Greška pri učitavanju artikla .");
       }
     };
 
@@ -43,21 +43,21 @@ export default function UpdateProductPage() {
 
     try {
       if (!id) {
-        setMessage("Product ID is missing.");
+        setMessage("Nedostaje ID Artikla.");
         return;
       }
 
-      const updatedProduct = await updateProduct(Number(id), {
-        name,
-        price: parseFloat(price),
+      const izmjenjenArtikal = await izmjeniArtikal(Number(id), {
+        naziv,
+        cijena: parseFloat(cijena),
       });
 
-      setMessage("Product updated successfully!");
-      router.push(`/product/`);
-      console.log("Updated Product:", updatedProduct);
+      setMessage("Artikal je uspješno izmjenjen!");
+      router.push(`/artikli/`);
+      console.log("Izmjenjen Artikal:", izmjenjenArtikal);
     } catch (error) {
-      setMessage("Failed to update product.");
-      console.error("Error updating product:", error);
+      setMessage("Greška pri izmjeni Artikla.");
+      console.error("Greška pri izmjeni Artikla:", error);
     } finally {
       setLoading(false);
     }
@@ -68,27 +68,27 @@ export default function UpdateProductPage() {
       <h1 className="text-3xl font-bold underline">Update Product</h1>
       <form onSubmit={handleUpdate} className="flex flex-col gap-4 mt-4">
         <div>
-          <label htmlFor="name" className="block font-medium">
-            Product Name:
+          <label htmlFor="naziv" className="block font-medium">
+            Product naziv:
           </label>
           <input
             type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="naziv"
+            value={naziv}
+            onChange={(e) => setnaziv(e.target.value)}
             className="border border-gray-300 rounded px-2 py-1 w-full"
             required
           />
         </div>
         <div>
-          <label htmlFor="price" className="block font-medium">
-            Product Price:
+          <label htmlFor="cijena" className="block font-medium">
+            Product cijena:
           </label>
           <input
             type="number"
-            id="price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            id="cijena"
+            value={cijena}
+            onChange={(e) => setcijena(e.target.value)}
             className="border border-gray-300 rounded px-2 py-1 w-full"
             required
           />
@@ -98,7 +98,7 @@ export default function UpdateProductPage() {
           disabled={loading}
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          {loading ? "Updating..." : "Update Product"}
+          {loading ? "Izmjena..." : "UIzmjeni Artikal"}
         </button>
       </form>
       {message && <p className="mt-4">{message}</p>}
