@@ -1,4 +1,3 @@
-
 "use server";
 
 import { db } from "@/prisma/db";
@@ -79,6 +78,31 @@ export async function deleteUserAction(
     };
   }
   redirect("/");
+}
+
+export async function deleteById(id: number | string) {
+  const numericId = typeof id === "string" ? parseInt(id, 10) : id;
+  if (!numericId || isNaN(numericId)) {
+    throw new Error("Invalid ID provided.");
+  }
+  try {
+    // Proverite da li korisnik postoji
+    const user = await db.user.findUnique({
+      where: { id: numericId },
+    });
+
+    if (!user) {
+      throw new Error("User not found.");
+    }
+
+    // Ako korisnik postoji, obrišite ga
+    await db.user.delete({
+      where: { id: numericId },
+    });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    throw error;
+  }
 }
 
 export async function updateUserAction(
