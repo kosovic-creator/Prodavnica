@@ -34,7 +34,7 @@ const CreateUser = () => {
       <input
         type="submit"
         value="Dodaj Korisnika"
-        className="rounded p-2 bg-blue-300 hover:bg-blue-200"
+        className="rounded p-2 bg-black text-zinc-50 hover:bg-slate-800e-200"
       />
       {formState.message && <p className="text-red-500">{formState.message}</p>}
     </form>
