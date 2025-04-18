@@ -28,7 +28,7 @@ export default function NewProductPage() {
 
       await dodajArtikal({ naziv, cijena: cijenaNumber });
 
-      setMessage('Product created successfully!');
+      setMessage('Artikal je uspješno dodat!');
 
       router.push(`/artikli/`);
     } catch (error) {
@@ -36,8 +36,8 @@ export default function NewProductPage() {
         // Prikazivanje grešaka validacije
         setMessage(error.errors[0].message);
       } else {
-        console.error('Error creating product:', error);
-        setMessage('Failed to create product.');
+        console.error('Greška pri dodavanju artikla:', error);
+        setMessage('Ne može da doda artikal.');
       }
     }
   };
@@ -76,7 +76,7 @@ export default function NewProductPage() {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          Create Product
+          Dodaj Artikal
         </button>
       </form>
       {message && <p className="mt-4 text-center text-gray-700">{message}</p>}
