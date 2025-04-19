@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 // import { useRouter } from "next/navigation";
 // const router = useRouter();
+import { revalidatePath } from 'next/cache';
+
 
 export async function getAllUsers() {
   try {
@@ -104,10 +106,10 @@ export async function deleteById(id: number | string) {
     console.error("Greška pri brisanju korisnika:", error);
     throw error;
   }
-  redirect("/admin/korisnici");
+  // redirect("/admin/korisnici");
   // window.location.reload();
   // router.reload();
-  redirect("/admin/korisnici");
+  revalidatePath("/admin/korisnici");
 }
 
 export async function updateUserAction(
