@@ -4,19 +4,18 @@ import ToastHandler from "@/components/ToastHandler";
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 export const fetchCache = 'force-no-store';
-import { useRouter } from "next/navigation"; // Za App Router
-import { useEffect } from "react";
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-    const router = useRouter();
+
     const { id } = await params;
 
     const handleDelete = async () => {
       await deleteById(parseInt(id));
-      router.replace("/admin/korisnici"); // ili router.push("/login")
+     // ili router.push("/login")
     };
 
 
