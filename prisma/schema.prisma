@@ -13,31 +13,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  username String @unique
-  password String
-  email    String @unique
 
-  role     Role   @default(USER)
-}
 
-enum Role {
-  ADMIN
-  USER
-}
-model Product {
-  id    Int    @id @default(autoincrement())
-  name  String
-  price Int
-}
 
-model Artikal {
-  id    Int    @id @default(autoincrement())
-  naziv  String
-  cijena Int
-}
 
 model Test {
   id    Int    @id @default(autoincrement())
