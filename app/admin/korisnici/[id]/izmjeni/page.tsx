@@ -1,9 +1,12 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { updateUserAction, getUserById } from '@/actions/index';
-import { useParams } from 'next/navigation'; // Adjust the import path as necessary
+import { useParams } from 'next/navigation';
 
-const UpdateUserForm: React.FC<{ userId: number }> = ({ userId }) => {
+const UpdateUserForm: React.FC = () => {
+  const { id } = useParams(); // Fetch the ID from the route parameters
+  const numericId = typeof id === 'string' ? parseInt(id, 10) : NaN;
+
   const [formData, setFormData] = useState({
     id: '',
     name: '',
@@ -12,9 +15,7 @@ const UpdateUserForm: React.FC<{ userId: number }> = ({ userId }) => {
     password: '',
   });
   const [message, setMessage] = useState('');
-   const { id } = useParams(); // Assuming you're using Next.js
-    const numericId = typeof id === 'string' ? parseInt(id, 10) : NaN;
-console.log('numericId:', numericId);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -34,8 +35,10 @@ console.log('numericId:', numericId);
       }
     };
 
-    fetchUserData();
-  }, [userId]);
+    if (!isNaN(numericId)) {
+      fetchUserData();
+    }
+  }, [numericId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,43 +52,6 @@ console.log('numericId:', numericId);
   };
 
   return (
-
-    // <form onSubmit={handleSubmit}>
-    //   <h2>Update User</h2>
-    //   {message && <p>{message}</p>}
-    //   <div>
-    //     <label>
-    //       ID:
-    //       <input type="text" name="id" value={formData.id} onChange={handleChange} required readOnly />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Name:
-    //       <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Username:
-    //       <input type="text" name="username" value={formData.username} onChange={handleChange} required />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Email:
-    //       <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-    //     </label>
-    //   </div>
-    //   <div>
-    //     <label>
-    //       Password:
-    //       <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-    //     </label>
-    //   </div>
-    //   <button type="submit">Update User</button>
-    // </form>
-  // );
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Izmjeni Korisnika</h1>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
