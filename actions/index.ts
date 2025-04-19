@@ -109,7 +109,7 @@ export async function deleteById(id: number | string) {
   // redirect("/admin/korisnici");
   // window.location.reload();
   // router.reload();
-  revalidatePath("/admin/korisnici");
+  // revalidatePath("/admin/korisnici");
 }
 
 export async function updateUserAction(

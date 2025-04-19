@@ -38,3 +38,9 @@ model Artikal {
   naziv  String
   cijena Int
 }
+
+model Test {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Int?
+}
