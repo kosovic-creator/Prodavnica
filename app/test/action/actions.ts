@@ -85,13 +85,14 @@ export async function deleteById(
 
   }
 
-  export async function getTestById(id: number | string) {
-    try {
-      return await db.test.findUnique({
-        where: { id: typeof id === "string" ? Number(id) : id },
-      });
-    } catch (error) {
-      console.error("Error fetching test by ID:", error);
-      throw error;
-    }
+  export async function getTestById(id: number) {
+  try {
+    return await db.test.findUnique({
+      where: { id: typeof id === "string" ? Number(id) : id },
+    });
   }
+  catch (error) {
+    console.error("Error fetching test by ID:", error);
+    throw error;
+  }
+}

@@ -1,33 +1,40 @@
-'use client';
+
 import { deleteById } from '@/app/test/action/actions';
-import { useEffect } from "react";
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export const fetchCache = 'force-no-store';
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export default function Delete({ params }: PageProps) {
-  const router = useRouter();
-  const { id } = params;
+export default async function Page({ params }: PageProps) {
 
-  useEffect(() => {
+    const { id } = await params;
+
     const handleDelete = async () => {
-      try {
-        await deleteById(parseInt(id)); // Ensure the deletion is completed
-        router.push("/test"); // Navigate after deletion
-      } catch (error) {
-        console.error("Error deleting the item:", error);
-      }
+      await deleteById(parseInt(id));
+     // ili router.push("/login")
     };
 
-    handleDelete();
-  }, [id, router]);
 
-  return null; // No UI is rendered
+  return (
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h2 className="text-3xl font-bold mb-6">Ukloni Korisnika</h2>
+        <form className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
+          <p>Korisnik sa ID {id} biće uklonjen.</p>
+          {/* <button onClick={handleDelete}>Porvrdi Brisanje</button> */}
+          <Link href="/admin/korisnici" className="text-red-800 p-8">Vrati se</Link>
+          <Link href="/admin/korisnici" className="text-blue-800 underline">
+            <button onClick={handleDelete}>Porvrdi Brisanje</button>
+          </Link>
+        </form>
+      </div>
+    </>
+  );
 }
+
 
 
 
