@@ -55,7 +55,7 @@ export async function createUserAction(
       message: "Nepoznata greška!",
     };
   }
-  redirect("/");
+  redirect("/admin/korisnici");
 }
 
 export async function deleteUserAction(
@@ -77,7 +77,7 @@ export async function deleteUserAction(
       message: "Nepoznata greška!",
     };
   }
-  redirect("/");
+  redirect("/admin/korisnici");
 }
 
 export async function deleteById(id: number | string) {
@@ -92,7 +92,7 @@ export async function deleteById(id: number | string) {
     });
 
     if (!user) {
-      throw new Error("User not found.");
+      throw new Error("Korisnik nije nađen.");
     }
 
     // Ako korisnik postoji, obrišite ga
@@ -100,9 +100,10 @@ export async function deleteById(id: number | string) {
       where: { id: numericId },
     });
   } catch (error) {
-    console.error("Error deleting user:", error);
+    console.error("Greška pri brisanju korisnika:", error);
     throw error;
   }
+  // redirect("/admin/korisnici");
 }
 
 export async function updateUserAction(

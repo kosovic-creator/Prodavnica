@@ -20,7 +20,7 @@ const UserDetails: React.FC = () => {
     const fetchUser = async () => {
       if (isNaN(numericId)) {
         console.error("Invalid ID in URL:", id);
-        setError("Invalid userId.");
+        setError("Neispravan id.");
         return;
       }
 
@@ -28,29 +28,47 @@ const UserDetails: React.FC = () => {
         const fetchedUser = await getUserById(numericId);
         setUser(fetchedUser);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch user.');
+        setError(err.message || 'Greška pri učitavanju korisnika.');
       }
     };
 
     fetchUser();
-  }, [numericId]);
+  }, [numericId, id]);
 
   if (error) {
     return <p>Error: {error}</p>;
   }
 
   if (!user) {
-    return <p>Loading user details...</p>;
+    return <p>Učutavam korisničke podateke...</p>;
   }
 
   return (
-    <div>
-      <h1>User Details</h1>
-      <p><strong>ID:</strong> {user.id}</p>
-      <p><strong>Name:</strong> {user.name}</p>
-      <p><strong>Username:</strong> {user.username}</p>
-      <p><strong>Email:</strong> {user.email}</p>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Detalji Korisnika</h1>
+      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <tbody>
+          <tr>
+            <td className="py-2 px-4 border-b">ID</td>
+            <td className="py-2 px-4 border-b">{user.id}</td>
+          </tr>
+          <tr>
+            <td className="py-2 px-4 border-b">Ime i Prezime</td>
+            <td className="py-2 px-4 border-b">{user.name}</td>
+          </tr>
+          <tr>
+            <td className="py-2 px-4 border-b">Korisničko Ime</td>
+            <td className="py-2 px-4 border-b">{user.username}</td>
+          </tr>
+          <tr>
+            <td className="py-2 px-4 border-b">Email</td>
+            <td className="py-2 px-4 border-b">{user.email}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  //   <div className="flex flex-col items-center justify-center min-h-screen"></div>
+  //     <h1 className="text-3xl font-bold mb-6">Detalji Korisnika</h1>
   );
 };
 

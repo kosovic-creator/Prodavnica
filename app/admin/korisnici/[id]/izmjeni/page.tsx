@@ -49,41 +49,65 @@ console.log('numericId:', numericId);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Update User</h2>
-      {message && <p>{message}</p>}
-      <div>
-        <label>
-          ID:
-          <input type="text" name="id" value={formData.id} onChange={handleChange} required readOnly />
-        </label>
-      </div>
-      <div>
-        <label>
-          Name:
-          <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-        </label>
-      </div>
-      <div>
-        <label>
-          Username:
-          <input type="text" name="username" value={formData.username} onChange={handleChange} required />
-        </label>
-      </div>
-      <div>
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-        </label>
-      </div>
-      <button type="submit">Update User</button>
-    </form>
+
+    // <form onSubmit={handleSubmit}>
+    //   <h2>Update User</h2>
+    //   {message && <p>{message}</p>}
+    //   <div>
+    //     <label>
+    //       ID:
+    //       <input type="text" name="id" value={formData.id} onChange={handleChange} required readOnly />
+    //     </label>
+    //   </div>
+    //   <div>
+    //     <label>
+    //       Name:
+    //       <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+    //     </label>
+    //   </div>
+    //   <div>
+    //     <label>
+    //       Username:
+    //       <input type="text" name="username" value={formData.username} onChange={handleChange} required />
+    //     </label>
+    //   </div>
+    //   <div>
+    //     <label>
+    //       Email:
+    //       <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+    //     </label>
+    //   </div>
+    //   <div>
+    //     <label>
+    //       Password:
+    //       <input type="password" name="password" value={formData.password} onChange={handleChange} required />
+    //     </label>
+    //   </div>
+    //   <button type="submit">Update User</button>
+    // </form>
+  // );
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">Izmjeni Korisnika</h1>
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
+        {message && <p className="text-red-500">{message}</p>}
+        <label>ID:</label>
+        <input type="text" name="id" value={formData.id} onChange={handleChange} required readOnly className="border rounded p-2 w-full" />
+
+        <label>Ime i Prezime:</label>
+        <input type="text" name="name" value={formData.name} onChange={handleChange} required className="border rounded p-2 w-full" />
+
+        <label>Korisničko Ime:</label>
+        <input type="text" name="username" value={formData.username} onChange={handleChange} required className="border rounded p-2 w-full" />
+
+        <label>Email:</label>
+        <input type="email" name="email" value={formData.email} onChange={handleChange} required className="border rounded p-2 w-full" />
+
+        <label>Password:</label>
+        <input type="password" name="password" value={formData.password} onChange={handleChange} required className="border rounded p-2 w-full" />
+
+        <button type="submit" className="rounded p-2 bg-black text-zinc-50 hover:bg-slate-800">Izmjeni Korisnika</button>
+      </form>
+    </div>
   );
 };
 

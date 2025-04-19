@@ -1,10 +1,10 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react"; // Ažurirano iz ReactDOM u React
 import { createUserAction } from "@/actions";
 
 const CreateUser = () => {
-  const [formState, action] = useFormState(createUserAction, { message: "" });
+    const [formState, action] = useActionState(createUserAction, { message: "" }); // Ažurirano iz useFormState
 
   return (
     <form action={action} className="flex flex-col gap-3 w-1/2">
@@ -18,7 +18,7 @@ const CreateUser = () => {
         name="username"
         className="border rounded p-2 w-full"
       />
-       <label>Email</label>
+          <label>Email</label>
       <input
         id="email"
         name="email"
@@ -34,10 +34,11 @@ const CreateUser = () => {
       <input
         type="submit"
         value="Dodaj Korisnika"
-        className="rounded p-2 bg-black text-zinc-50 hover:bg-slate-800e-200"
+              className="rounded p-2 bg-black text-zinc-50 hover:bg-slate-800"
       />
       {formState.message && <p className="text-red-500">{formState.message}</p>}
     </form>
   );
 };
+
 export default CreateUser;
