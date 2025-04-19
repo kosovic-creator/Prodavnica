@@ -3,7 +3,8 @@
 import { db } from "@/prisma/db";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
-
+// import { useRouter } from "next/navigation";
+// const router = useRouter();
 
 export async function getAllUsers() {
   try {
@@ -58,27 +59,27 @@ export async function createUserAction(
   redirect("/admin/korisnici");
 }
 
-export async function deleteUserAction(
-  formState: { message: string },
-  formData: FormData
-) {
-  try {
-    const id = formData.get("id") as string;
-    if (!id) {
-      return { message: "ID je obavezno." };
-    }
-    const numericId = parseInt(id, 10);
-    if (isNaN(numericId)) {
-      return { message: "ID mora biti broj." };
-    }
-    db.user.delete({ where: { id: numericId } });
-  } catch (err: unknown) {
-    return {
-      message: "Nepoznata greška!",
-    };
-  }
-  redirect("/admin/korisnici");
-}
+// export async function deleteUserAction(
+//   formState: { message: string },
+//   formData: FormData
+// ) {
+//   try {
+//     const id = formData.get("id") as string;
+//     if (!id) {
+//       return { message: "ID je obavezno." };
+//     }
+//     const numericId = parseInt(id, 10);
+//     if (isNaN(numericId)) {
+//       return { message: "ID mora biti broj." };
+//     }
+//     db.user.delete({ where: { id: numericId } });
+//   } catch (err: unknown) {
+//     return {
+//       message: "Nepoznata greška!",
+//     };
+//   }
+//   redirect("/admin/korisnici");
+// }
 
 export async function deleteById(id: number | string) {
   const numericId = typeof id === "string" ? parseInt(id, 10) : id;
@@ -103,7 +104,10 @@ export async function deleteById(id: number | string) {
     console.error("Greška pri brisanju korisnika:", error);
     throw error;
   }
-  // redirect("/admin/korisnici");
+  redirect("/admin/korisnici");
+  // window.location.reload();
+  // router.reload();
+  redirect("/admin/korisnici");
 }
 
 export async function updateUserAction(
@@ -137,7 +141,7 @@ export async function updateUserAction(
       message: "Nepoznata greška!",
     };
   }
-  redirect("/");
+  redirect("/admin/korisnici");
 }
 export async function getUserById(id: number | string) {
   console.log("Received ID:", id); // Debugging line
@@ -185,4 +189,5 @@ export async function updateUserById(
     console.error("Error updating user:", error);
     throw error;
   }
+  redirect("/admin/korisnici");
 }
