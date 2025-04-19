@@ -3,18 +3,22 @@ import { deleteById} from "@/actions/index";
 import ToastHandler from "@/components/ToastHandler";
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { useState } from "react";
 export const fetchCache = 'force-no-store';
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Delete({ params }: PageProps) {
+  const [isDeleted, setIsDeleted] = useState(false);
 
     const { id } = await params;
 
     const handleDelete = async () => {
       await deleteById(parseInt(id));
+      setIsDeleted(true);
+
      // ili router.push("/login")
     };
 
@@ -31,9 +35,11 @@ export default async function Page({ params }: PageProps) {
         <h2 className="text-3xl font-bold mb-6">Ukloni Korisnika</h2>
         <form className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
           <p>Korisnik sa ID {id} biće uklonjen.</p>
+          <p>{isDeleted}</p>
           {/* <button onClick={handleDelete}>Porvrdi Brisanje</button> */}
           <Link href="/admin/korisnici"  className="text-red-800 p-8 ">Vrati se</Link>
           <Link href="/admin/korisnici"  className="text-blue-800 underline"> <button onClick={handleDelete}>Porvrdi Brisanje</button></Link>
+
         </form>
       </div>
 

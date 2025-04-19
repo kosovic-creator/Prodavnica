@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllUsers } from "@/actions/index";
 import Link from 'next/link';
+import Delete from './[id]/ukloni/page';
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -32,8 +33,9 @@ const UserList: React.FC = () => {
   }
 
   return (
+    <>
 
-    <div className="flex flex-col items-center justify-center min-h-screen">
+<div className="flex flex-col items-center justify-center min-h-screen">
        <Link className='text-emerald-900' href="/admin/korisnici/novi">Dodaj</Link>
       <h1 className="text-3xl font-bold mb-6">Lista Korisnika</h1>
       <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
@@ -60,6 +62,10 @@ const UserList: React.FC = () => {
         </tbody>
       </table>
     </div>
+
+    </>
+
+
   );
   //   <div className="flex flex-col items-center justify-center min-h-screen"></div>
   //     <h1 className="text-3xl font-bold mb-6">Lista Korisnika</h1>

@@ -7,7 +7,7 @@ const CreateUser = () => {
     const [formState, action] = useActionState(createUserAction, { message: "" }); // Ažurirano iz useFormState
 
   return (
-    <form action={action} className="flex flex-col gap-3 w-1/2">
+    <form action={action} className="flex flex-col items-center justify-center min-h-screen">
       <h1>Dodaj Novog Korisnika</h1>
       <label>Ime i Prezime</label>
       <input id="name" name="name" className="border rounded p-2 w-full" />
